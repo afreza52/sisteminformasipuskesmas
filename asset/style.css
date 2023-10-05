@@ -1,0 +1,12 @@
+.btn-blink {
+    animation: blink-animation 0.9s step-end infinite;
+}
+
+@keyframes blink-animation {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
