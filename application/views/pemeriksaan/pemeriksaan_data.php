@@ -25,10 +25,12 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>ID Pendaftaran</th>
+                            <th>ID Pemeriksaan</th>
                             <th>Pasien</th>
                             <th>Dokter</th>
                             <th>Poliklinik</th>
+                            <th>Tindakan</th>
+                            <th>Diagnosa</th>
                             <th>Tanggal Pemeriksaan</th>
                             <th>Aksi</th>
                         </tr>
@@ -41,7 +43,7 @@
                                     <?= $no; ?>
                                 </th>
                                 <td>
-                                    <?= $p['id_pendaftaran']; ?>
+                                    <?= $p['id_pemeriksaan']; ?>
                                 </td>
                                 <td>
                                     <?= $p['pasien']; ?>
@@ -52,6 +54,12 @@
                                 <td>
                                     <?= $p['poliklinik']; ?>
                                 </td>
+                                <td>
+                                    <?= $p['tindakan']; ?>
+                                </td>
+                                <td>
+                                    <?= $p['diagnosa']; ?>
+                                </td>   
                                 <td>
                                     <?= $p['tanggal_pemeriksaan']; ?>
                                 </td>

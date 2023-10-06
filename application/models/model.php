@@ -55,13 +55,15 @@ class model extends CI_Model
   }
   function getPemeriksaan()
   {
-    $query = "SELECT pemeriksaan.*,pasien.nama as pasien, dokter.nama as dokter, poliklinik.nama as poliklinik,pendaftaran.id_pendaftaran
-                FROM pemeriksaan 
-                JOIN pendaftaran ON pemeriksaan.id_pendaftaran = pendaftaran.id_pendaftaran
-                JOIN pasien ON pendaftaran.id_pasien = pasien.id_pasien
-                JOIN dokter ON pendaftaran.id_dokter = dokter.id_dokter
-                JOIN poliklinik ON pendaftaran.id_poliklinik = poliklinik.id_poliklinik
-               WHERE pemeriksaan.status = 1";
+    $query = "SELECT a.*,c.nama as pasien, d.nama as dokter, e.nama as poliklinik,f.nama as diagnosa,g.nama as tindakan
+                FROM pemeriksaan as a
+                JOIN pendaftaran as b ON a.id_pendaftaran = b.id_pendaftaran
+                JOIN pasien as c ON b.id_pasien = c.id_pasien
+                JOIN dokter as d ON b.id_dokter = d.id_dokter
+                JOIN poliklinik as e ON b.id_poliklinik = e.id_poliklinik
+                JOIN diagnosa as f ON a.id_diagnosa = f.id_diagnosa
+                JOIN tindakan as g ON a.id_tindakan = g.id_tindakan
+               WHERE a.status = 1";
     return $this->db->query($query)->result_array();
   }
   function getPemeriksaanPoli($where)
@@ -96,6 +98,23 @@ class model extends CI_Model
                WHERE a.status = ? ";
     return $this->db->query($query, [$where])->result_array();
   }
-
+  function resep($where)
+  {
+    $query = "SELECT a.*,b.nama as obat
+                FROM resep_obat as a
+                JOIN obat as b ON b.id_obat = a.id_obat
+               WHERE a.id_pemeriksaan = ?";
+    return $this->db->query($query, [$where])->result_array();
+  }
+  function cetakresep($where)
+  {
+    $query = "SELECT d.*,b.nama as dokter,a.tanggal_pemeriksaan as tanggal_resep
+    FROM pemeriksaan as a
+    JOIN pendaftaran as c ON a.id_pendaftaran = c.id_pendaftaran
+    JOIN pasien as d ON c.id_pasien = d.id_pasien
+    JOIN dokter as b ON c.id_dokter = b.id_dokter
+    WHERE a.id_pemeriksaan = ?";
+    return $this->db->query($query,[$where])->result_array();
+  }
 
 }

@@ -323,10 +323,6 @@
                                     href="<?= base_url('obat'); ?>"><i class="fa fa-adjust"></i>Data
                                     Obat</a>
                             </li>
-                            <li <?= $this->uri->segment(1) == 'resep' ? 'class="active"' : '' ?>><a
-                                    href="<?= base_url('obat/resep_obat'); ?>"><i class="fa fa-adjust"></i>Resep
-                                    Obat</a>
-                            </li>
                         </ul>
                     </li>
                     <li class="header">SETTINGS</li>

@@ -1,4 +1,3 @@
-
 <div class="content-wrapper">
     <section class="content-header">
         <h1>
@@ -70,8 +69,8 @@
                                         class="btn btn-xs btn-primary"><i class="fa fa-stethoscope"></i>Periksa</a>
                                     <a href="<?= base_url('pemeriksaan/delet/'); ?><?= $p['id_pemeriksaan']; ?>"
                                         class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></a>
-                                    <a href="<?= base_url('pemeriksaan/detail/'); ?><?= $p['id_pemeriksaan']; ?>"
-                                        class="btn btn-xs btn-danger"><i class="fa fa-eye"></i></a>
+                                    <a href="<?= base_url('obat/cetakresep/'); ?><?= $p['id_pemeriksaan']; ?>"
+                                        class="btn btn-xs btn-warning"><i class="fa fa-print"></i> Resep</a>
                                 </td>
                             </tr>
                             <?php $no++; ?>

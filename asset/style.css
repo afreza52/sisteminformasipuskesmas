@@ -1,3 +1,6 @@
+body {
+    font-family: Arial, sans-serif;
+}
 .btn-blink {
     animation: blink-animation 0.9s step-end infinite;
 }
@@ -9,4 +12,56 @@
     50% {
         opacity: 0;
     }
+}
+
+.container {
+    max-width:720px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.patient-info {
+    margin-bottom: 20px;
+}
+
+.medication-list {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.medication-list th,
+.medication-list td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.medication-list th {
+    background-color: #f2f2f2;
+    text-align: center;
+}
+
+.signature {
+    margin-top: 20px;
+}
+
+.signature p {
+    text-align: center;
+}
+
+.size {
+    font-size: 12px;
+    margin-top: -2px;
+}
+
+.title {
+    font-size: 33px;
+}
+
+.center {
+    text-align: center;
 }

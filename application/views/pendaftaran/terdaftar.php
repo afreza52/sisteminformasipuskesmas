@@ -16,11 +16,12 @@
             <div class="box-header">
                 <h3 class="box-title">Terdaftar </h3>
                 <div class="pull-right">
-                    <a href="<?= base_url('pendaftaran/daftar') ?>" class="btn btn-primary btn-xs btn-flat">
+                    <a href="<?= base_url('pendaftaran/daftarbaru') ?>" class="btn btn-primary btn-xs btn-flat">
                         <i class="fa fa-plus"></i> Daftar
                     </a>
                 </div>
                 <hr>
+                <a href="" class="btn btn-sm btn-primary"><i class="fa fa-print"></i> Cetak</a>
             </div>
             <div class="box-body table-resposive">
                 <table class="table table-bordered table-striped" id="table">
@@ -29,6 +30,7 @@
                             <th>#</th>
                             <th>NO RM</th>
                             <th>Nama Pasien</th>
+                            <th>Jenis Pasien</th>
                             <th>Dokter</th>
                             <th>Poliklinik</th>
                             <th>Tanggal</th>
@@ -49,6 +51,9 @@
                                     <?= $pdf['pasien'] ?>
                                 </td>
                                 <td>
+                                    <?= $pdf['jenis_pasien'] == 1 ? "Umum" : "BPJS"; ?>
+                                </td>
+                                <td>
                                     <?= $pdf['dokter'] ?>
                                 </td>
                                 <td>
@@ -60,7 +65,8 @@
                                 <td>
                                     <a href="" data-toggle="modal"
                                         data-target="#pendaftaranModal<?= $pdf['id_pendaftaran'] ?>"
-                                        class="btn btn-xs btn-primary"><i class="fa fa-eye"></i>Detail</a>
+                                        class="btn btn-xs btn-primary"><i class="fa fa-eye"></i> Detail</a>
+                                    <a href="" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                             <?php $no++ ?>
@@ -138,6 +144,12 @@
                                         <td>Dokter</td>
                                         <td>
                                             <?= $pdf['dokter'] ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jenis Pasien</td>
+                                        <td>
+                                            <?= $pdf['jenis_pasien'] == 1 ? "Umum" : "BPJS"; ?>
                                         </td>
                                     </tr>
 

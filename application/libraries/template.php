@@ -14,4 +14,11 @@ class Template
         $this->set('contents', $this->CI->load->view($view, $view_data, TRUE));
         return $this->CI->load->view($template, $this->template_data, $return);
     }
+    function cetak($template = '', $view = '', $view_data = [], $return = false)
+    {
+        $this->CI =& get_instance();
+        $this->set('conten', $this->CI->load->view($view, $view_data, TRUE));
+        return $this->CI->load->view($template, $this->template_data, $return);
+    }
+    
 }

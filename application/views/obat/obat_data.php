@@ -13,17 +13,16 @@
     <!-- Main content -->
     <section class="content">
         <div class="box">
+            <?= $this->session->flashdata('message2'); ?>
             <div class="box-header">
                 <h3 class="box-title">Data Obat</h3>
-                <?= form_error('obat', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
-
-                <?= $this->session->flashdata('message2'); ?>
                 <div class="pull-right">
                     <a href="" class="btn btn-primary btn-xs btn-flat" data-toggle="modal" data-target="#newobatModal">
                         <i class="fa fa-user-plus"></i> Tambah
                     </a>
                 </div>
                 <hr>
+                <a href="" class="btn btn-sm btn-primary"><i class="fa fa-print"></i> Cetak</a>
             </div>
             <div class="box-body table-resposive">
                 <table class="table table-bordered table-striped" id="table">
@@ -32,7 +31,10 @@
                             <th>#</th>
                             <th>Nama Obat</th>
                             <th>Stok</th>
-                            <th>Actions</th>
+                            <th>Dosis</th>
+                            <th>Harga</th>
+                            <th>Tanggal Kadeluwarsa</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,6 +49,15 @@
                                 </td>
                                 <td>
                                     <?= $o['stok']; ?>
+                                </td>
+                                <td>
+                                    <?= $o['dosis']; ?>
+                                </td>
+                                <td>
+                                    <?= $o['harga']; ?>
+                                </td>
+                                <td>
+                                    <?= $o['tanggal_kadaluwarsa']; ?>
                                 </td>
                                 <td>
                                     <a href="" data-toggle="modal" data-target="#editobatModal<?= $o['id_obat']; ?>"
@@ -81,6 +92,15 @@
                     <div class="form-group">
                         <input type="text" class="form-control" name="stok" placeholder="Stok obat">
                     </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="dosis" placeholder="Dosis obat">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="harga" placeholder="Harga obat">
+                    </div>
+                    <div class="form-group">
+                        <input type="date" class="form-control" name="tanggal" placeholder="Tanggal Kadaluwarsa obat">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -108,6 +128,15 @@
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" name="stok" value="<?= $o['stok'] ?>">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="dosis" value="<?= $o['dosis'] ?>">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="harga" value="<?= $o['harga'] ?>">
+                        </div>
+                        <div class="form-group">
+                            <input type="date" class="form-control" name="tanggal" value="<?= $o['tanggal_kadaluwarsa'] ?>">
                         </div>
                     </div>
                     <div class="modal-footer">

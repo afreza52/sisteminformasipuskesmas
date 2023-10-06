@@ -6,6 +6,9 @@ class obat extends CI_Controller
         $data['obat'] = $this->db->get('obat')->result_array();
         $this->form_validation->set_rules('nama', 'Nama Obat', 'required');
         $this->form_validation->set_rules('stok', 'Stok', 'required');
+        $this->form_validation->set_rules('dosis', 'Dosis', 'required');
+        $this->form_validation->set_rules('harga', 'Harga', 'required');
+        $this->form_validation->set_rules('tanggal', 'Tanggal Kadaluwara', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->template->load('template', 'obat/obat_data', $data);
@@ -13,7 +16,10 @@ class obat extends CI_Controller
         } else {
             $data = [
                 'nama' => $this->input->post('nama'),
-                'stok' => $this->input->post('stok')
+                'stok' => $this->input->post('stok'),
+                'dosis' => $this->input->post('dosis'),
+                'harga' => $this->input->post('harga'),
+                'tanggal_kadaluwarsa' => $this->input->post('tanggal'),
             ];
 
             $this->db->insert('obat', $data);
@@ -26,11 +32,17 @@ class obat extends CI_Controller
     {
         $this->form_validation->set_rules('nama', 'Nama Obat', 'required');
         $this->form_validation->set_rules('stok', 'Stok', 'required');
+        $this->form_validation->set_rules('dosis', 'Dosis', 'required');
+        $this->form_validation->set_rules('harga', 'Harga', 'required');
+        $this->form_validation->set_rules('tanggal', 'Tanggal Kadaluwara', 'required');
 
         if ($this->form_validation->run() == true) {
             $data = [
                 'nama' => $this->input->post('nama'),
-                'stok' => $this->input->post('stok')
+                'stok' => $this->input->post('stok'),
+                'dosis' => $this->input->post('dosis'),
+                'harga' => $this->input->post('harga'),
+                'tanggal_kadaluwarsa' => $this->input->post('tanggal'),
             ];
             $this->db->where('id_obat', $id);
             $this->db->update('obat', $data);
@@ -38,8 +50,12 @@ class obat extends CI_Controller
             redirect('obat');
         }
     }
-    function cetakresep()
+    function cetakresep($id)
     {
-        $this->load->view('obat/cetak_resep');
+        $data= [
+            'cetakresep' =>$this->model->cetakresep(['id_pemeriksaan'=>$id]),
+            'resep' => $this->model->resep(['id_pemeriksaan'=>$id])
+        ];
+        $this->template->cetak('cetak','obat/cetak_resep',$data);
     }
 }
