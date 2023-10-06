@@ -12,17 +12,19 @@
 
     <!-- Main content -->
     <section class="content">
+        <?= $this->session->flashdata('message2'); ?>
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Data Pasien</h3>
-                <?= $this->session->flashdata('message2'); ?>
                 <hr>
+                <a href="" class="btn btn-sm btn-primary"><i class="fa fa-print"></i> Cetak</a>
             </div>
             <div class="box-body table-resposive">
                 <table class="table table-bordered table-striped" id="table">
                     <thead>
                         <tr>
                             <th>NO RM</th>
+                            <th>Aksi</th>
                             <th>NIK</th>
                             <th>Nama Pasien</th>
                             <th>Alamat</th>
@@ -30,7 +32,6 @@
                             <th>Jenis Kelamin</th>
                             <th>Jenis Pasien</th>
                             <th>Tanggal Lahir</th>
-                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,6 +39,24 @@
                             <tr>
                                 <td>
                                     <?= $p['nomor_rekam_medis'] ?>
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-xs btn-info dropdown-toggle"
+                                            data-toggle="dropdown">
+                                            Aksi <i class="fa fa-caret-down"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                            <li><a href="#" data-toggle="modal"
+                                                    data-target="#editPasienModal<?= $p['id_pasien']; ?>">Edit <i
+                                                        class="fa fa-edit"></i></a></li>
+                                            <li><a href="<?= base_url('pasien/delete/') ?><?= $p['id_pasien'] ?>">Hapus <i
+                                                        class="fa fa-trash-o"></i></a></li>
+                                            <li><a href="<?= base_url('pasien/cetak/') ?><?= $p['id_pasien'] ?>">Cetak <i
+                                                        class="fa fa-print"></i></a></li>
+                                        </ul>
+                                    </div>
+
                                 </td>
                                 <td>
                                     <?= $p['nik'] ?>
@@ -55,16 +74,10 @@
                                     <?= $p['jenis_kelamin']; ?>
                                 </td>
                                 <td>
-                                    <?= $p['jenis_pasien']== 1 ? "Umum" : "BPJS"; ?>
+                                    <?= $p['jenis_pasien'] == 1 ? "Umum" : "BPJS"; ?>
                                 </td>
                                 <td>
                                     <?= $p['tanggal_lahir']; ?>
-                                </td>
-                                <td>
-                                    <a href="" data-toggle="modal" data-target="#editPasienModal<?= $p['id_pasien']; ?>"
-                                        class="btn btn-xs btn-info"><i class="fa fa-edit"></i></a>
-                                    <a href="<?= base_url('pasien/delete/') ?><?= $p['id_pasien'] ?>"
-                                        class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -121,11 +134,11 @@
                                 required>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Nomor Telpon</label>
+                            <label class="control-label">Jenis Pasien</label>
                             <select class="form-control" name="jenis_pasien" required>
                                 <option value="">-PILIH-</option>
-                                <option value="1">Umum</option>
-                                <option value="2">BPJS</option>
+                                <option value="1" <?= ($p['jenis_pasien'] == 1) ? 'selected' : ''; ?>>Umum</option>
+                                <option value="2" <?= ($p['jenis_pasien'] == 2) ? 'selected' : ''; ?>>BPJS</option>
                             </select>
                         </div>
                     </div>

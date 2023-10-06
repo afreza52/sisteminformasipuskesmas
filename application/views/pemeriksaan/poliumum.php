@@ -12,14 +12,12 @@
 
     <!-- Main content -->
     <section class="content">
+        <?= $this->session->flashdata('message2'); ?>
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Data Pemeriksaan Di Poliklinik Umum</h3>
                 <?= form_error('pemeriksaan', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
-
-                <?= $this->session->flashdata('message2'); ?>
-
-                <hr>
+                <hr> <a href="" class="btn btn-sm btn-primary"><i class="fa fa-print"></i> Cetak</a>
             </div>
             <div class="box-body table-resposive">
                 <table class="table table-bordered table-striped" id="table">

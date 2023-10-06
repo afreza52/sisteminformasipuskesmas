@@ -65,3 +65,40 @@ body {
 .center {
     text-align: center;
 }
+
+  .border{
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  .center{
+    text-align: center;
+  }
+  .left{
+    text-align: left;
+  }
+  .right{
+    text-align: right;
+  }
+
+  
+    /* @page {
+        size: A4;
+        margin: 0;
+    }
+    @media print {
+        html, body {
+            width: 210mm;
+            height: 297mm;        
+        }
+        .page {
+            margin: 5px;
+            border: initial;
+            border-radius: initial;
+            width: initial;
+            min-height: initial;
+            box-shadow: initial;
+            background: initial;
+            page-break-after: always;
+        }
+    } */
+ 

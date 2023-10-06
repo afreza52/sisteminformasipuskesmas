@@ -12,19 +12,19 @@
 
     <!-- Main content -->
     <section class="content">
+        <?= $this->session->flashdata('message3'); ?>
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Data poliklinik</h3>
                 <?= form_error('poliklinik', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
 
-                <?= $this->session->flashdata('message3'); ?>
                 <div class="pull-right">
                     <a href="" class="btn btn-primary btn-xs btn-flat" data-toggle="modal"
                         data-target="#newPoliklinikModal">
                         <i class="fa fa-plus"></i> Tambah
                     </a>
                 </div>
-                <hr>
+                <hr> <a href="" class="btn btn-sm btn-primary"><i class="fa fa-print"></i> Cetak</a>
             </div>
             <div class="box-body table-resposive">
                 <table class="table table-bordered table-striped" id="table">

@@ -3,7 +3,7 @@
 class Template
 {
     var $template_data = [];
-
+    
     function set($name, $value)
     {
         $this->template_data[$name] = $value;

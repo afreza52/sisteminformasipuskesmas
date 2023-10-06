@@ -1,6 +1,11 @@
 <?php
 class obat extends CI_Controller
 {
+    function __construct()
+    {
+        parent::__construct();
+        check_not_login();
+    }
     function index()
     {
         $data['obat'] = $this->db->get('obat')->result_array();

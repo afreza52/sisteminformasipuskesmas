@@ -29,9 +29,9 @@
         <div class="header center">
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table-responsive">
+                    <table width="100%">
                         <tr>
-                            <td>
+                            <td width="110">
                                 <img src="<?= base_url('asset/dist/img/logo.png'); ?>" style="width:100px; ">
                             </td>
                             <td>
@@ -42,7 +42,7 @@
                                     59454</p>
                                 <p class="size center">Kepala Puskesmas Sejahtera : Prof. Afreza Dwi Zuliyanto S1.</p>
                             </td>
-                            <td>
+                            <td width="110">
                                 <img src="<?= base_url('asset/dist/img/logo1.png'); ?>" style="width:100px; ">
                             </td>
                         </tr>

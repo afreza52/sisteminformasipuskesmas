@@ -24,7 +24,7 @@
                         <i class="fa fa-user-plus"></i> Tambah
                     </a>
                 </div>
-                <hr>
+                <hr> <a href="" class="btn btn-sm btn-primary"><i class="fa fa-print"></i> Cetak</a>
             </div>
             <div class="box-body table-resposive">
                 <table class="table table-bordered table-striped" id="table">
