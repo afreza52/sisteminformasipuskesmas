@@ -2,8 +2,10 @@
 
 class Auth extends CI_Controller
 {
+
     function login()
     {
+        check_already_login();
         $this->load->view('login');
     }
     function process()
@@ -16,10 +18,11 @@ class Auth extends CI_Controller
             if (password_verify($this->input->post('password'), $user->password)) {
                 $data = [
                     'id_user' => $user->id_user,
+                    'username' => $user->username,
+                    'nama' => $user->nama,
                     'role' => $user->role
                 ];
                 $this->session->set_userdata($data);
-
                 redirect('dashboard');
             }
         }
@@ -29,8 +32,11 @@ class Auth extends CI_Controller
     }
     function logout()
     {
-        $data = ['id_user', 'role'];
-        $this->session->sess_destroy($data);
+        $this->session->unset_userdata('id_user');
+        $this->session->unset_userdata('username');
+        $this->session->unset_userdata('nama');
+        $this->session->unset_userdata('role');
+        $this->session->sess_destroy();
         redirect('auth/login');
     }
 }

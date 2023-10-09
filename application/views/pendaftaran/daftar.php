@@ -31,15 +31,14 @@
                             <div class="form-group">
                                 <label for="" class="col-sm-3 control-label">Tanggal Pendaftaran</label>
                                 <div class="col-sm-8">
-                                    <input type="datetime" name="tanggal_pendaftaran" id="tanggal_pendaftaran"
-                                        class="form-control" value="<?= date('Y-m-d H:i:s') ?>" timezone="Asia/Jakarta"
-                                        readonly>
+                                    <input type="text" id="waktu" name="tanggal_pendaftaran" 
+                                        class="form-control" readonly>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">No RM</label>
                                 <div class="col-sm-8">
-                                    <input type="text" name="no_rm" class="form-control" value="<?=$norm?>" readonly>
+                                    <input type="text" name="no_rm" class="form-control" value="<?= $norm ?>" readonly>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -127,8 +126,8 @@ Kodepos 53356"></textarea>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                    <button type="close" class="btn btn-default">Batal</button>
-                    <button type="submit" class="btn btn-info pull-right">Simpan</button>
+                    <button type="close" class="btn btn-default"><i class="fa fa-undo"></i> Batal</button>
+                    <button type="submit" class="btn btn-info pull-right"><i class="fa fa-save"></i> Simpan</button>
                 </div>
             </form>
         </div>
@@ -140,36 +139,52 @@ Kodepos 53356"></textarea>
     <!-- /.content -->
 </div>
 <script>
- function isiPilihanDokter() {
-    const poliklinikSelect = $("#poliklinik");
-    const dokterSelect = $("#dokter");
-    const selectedPoliklinikId = poliklinikSelect.val();
+    function isiPilihanDokter() {
+        const poliklinikSelect = $("#poliklinik");
+        const dokterSelect = $("#dokter");
+        const selectedPoliklinikId = poliklinikSelect.val();
 
-    dokterSelect.empty();// Kosongkan pilihan dokter saat ini
+        dokterSelect.empty();// Kosongkan pilihan dokter saat ini
 
 
-    $.ajax({
-        url: "<?= base_url('pendaftaran/getDokterByPoliklinik') ?>", // Sesuaikan dengan URL controller Anda
-        method: "POST",
-        data: { id_poliklinik: selectedPoliklinikId },
-        success: function (response) {
-            const dokter = JSON.parse(response);
+        $.ajax({
+            url: "<?= base_url('pendaftaran/getDokterByPoliklinik') ?>", // Sesuaikan dengan URL controller Anda
+            method: "POST",
+            data: { id_poliklinik: selectedPoliklinikId },
+            success: function (response) {
+                const dokter = JSON.parse(response);
 
-            // Isi ulang pilihan dokter sesuai dengan data yang diterima dari server
-            dokter.forEach(function (dokter) {
-                dokterSelect.append(new Option(dokter.dokter, dokter.id_dokter));
-            });
-        },
-        error: function () {
-            console.error("Gagal mengambil data dokter.");
-        }
+                // Isi ulang pilihan dokter sesuai dengan data yang diterima dari server
+                dokter.forEach(function (dokter) {
+                    dokterSelect.append(new Option(dokter.dokter, dokter.id_dokter));
+                });
+            },
+            error: function () {
+                console.error("Gagal mengambil data dokter.");
+            }
+        });
+    }
+
+    // Panggil fungsi isiPilihanDokter saat halaman dimuat ulang dan ketika pemilihan poliklinik berubah
+    $(document).ready(function () {
+        isiPilihanDokter();
+        $("#poliklinik").change(isiPilihanDokter);
     });
-}
+    function updatewaktu() {
+        var clockElement = document.getElementById('waktu');
+        var xhr = new XMLHttpRequest();
 
-// Panggil fungsi isiPilihanDokter saat halaman dimuat ulang dan ketika pemilihan poliklinik berubah
-$(document).ready(function () {
-    isiPilihanDokter();
-    $("#poliklinik").change(isiPilihanDokter);
-});
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                clockElement.value = xhr.responseText;
+            }
+        };
 
+        xhr.open('GET', '<?= base_url("pendaftaran/get_current_time"); ?>', true);
+        xhr.send();
+
+        setTimeout(updatewaktu, 1000); // Refresh every 1 second
+    }
+
+    updatewaktu();
 </script>

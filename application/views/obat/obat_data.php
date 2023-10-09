@@ -18,7 +18,7 @@
                 <h3 class="box-title">Data Obat</h3>
                 <div class="pull-right">
                     <a href="" class="btn btn-primary btn-xs btn-flat" data-toggle="modal" data-target="#newobatModal">
-                        <i class="fa fa-user-plus"></i> Tambah
+                        <i class="fa fa-plus"></i> Tambah
                     </a>
                 </div>
                 <hr>
@@ -103,8 +103,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Tambah</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-undo"></i> Batal</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
                 </div>
             </form>
         </div>
@@ -140,8 +140,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-undo"></i> Close</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
                     </div>
                 </form>
             </div>

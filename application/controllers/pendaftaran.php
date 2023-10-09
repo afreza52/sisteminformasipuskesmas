@@ -5,6 +5,7 @@ class Pendaftaran extends CI_Controller
     {
         parent::__construct();
         check_not_login();
+        check_petugas();
     }
     function daftarbaru()
     {
@@ -121,6 +122,13 @@ class Pendaftaran extends CI_Controller
         $data['pendaftaran'] = $this->model->pendaftaran();
         $this->template->load('template', 'pendaftaran/terdaftar', $data);
     }
+    function delet($id)
+    {
+        $this->db->where('id_pendaftaran', $id);
+        $this->db->delete('pendaftaran');
+        $this->session->set_flashdata('message2', '<div class="alert alert-success" role="alert">pendaftaran telah dihapus!</div>');
+        redirect('pendaftaran');
+    }
     function caripasien()
     {
         $id = $this->input->get('id');
@@ -137,6 +145,10 @@ class Pendaftaran extends CI_Controller
         }
         $this->output->set_content_type('application/json');
         echo json_encode($data);
+    }
+    function get_current_time() {
+        date_default_timezone_set('Asia/Jakarta');
+        echo date('Y-m-d H:i:s');
     }
     // function simpanPasienBaru()
     // {

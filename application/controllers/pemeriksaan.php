@@ -5,6 +5,7 @@ class pemeriksaan extends CI_Controller
     {
         parent::__construct();
         check_not_login();
+        check_dokter();
     }
     function index()
     {
@@ -15,6 +16,13 @@ class pemeriksaan extends CI_Controller
             'tindakan' => $this->db->get('tindakan')->result_array(),
         ];
         $this->template->load('template', 'pemeriksaan/pemeriksaan_data', $data);
+    }
+    function delet($id)
+    {
+        $this->db->where('id_pemeriksaan', $id);
+        $this->db->delete('pemeriksaan');
+        $this->session->set_flashdata('message2', '<div class="alert alert-success" role="alert">pemeriksaan telah dihapus!</div>');
+        redirect('pemeriksaan');
     }
     function umum()
     {

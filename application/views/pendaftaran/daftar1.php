@@ -36,8 +36,8 @@
                             <div class="form-group">
                                 <label for="" class="col-sm-3 control-label">Tanggal Pendaftaran</label>
                                 <div class="col-sm-8">
-                                    <input type="datetime" name="tanggal_pendaftaran" id="tanggal_pendaftaran"
-                                        class="form-control" value="<?= date('Y-m-d H:i:s') ?>" timezone="Asia/Jakarta"
+                                    <input type="datetime" name="tanggal_pendaftaran" id="waktu"
+                                        class="form-control" 
                                         readonly>
                                 </div>
                             </div>
@@ -136,8 +136,8 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                    <button type="close" class="btn btn-default">Batal</button>
-                    <button type="submit" class="btn btn-info pull-right">Simpan</button>
+                    <button type="close" class="btn btn-default"><i class="fa fa-undo"></i> Batal</button>
+                    <button type="submit" class="btn btn-info pull-right"><i class="fa fa-save"></i> Simpan</button>
                 </div>
             </form>
         </div>
@@ -220,5 +220,21 @@
             }
         });
     }
+    function updatewaktu() {
+        var clockElement = document.getElementById('waktu');
+        var xhr = new XMLHttpRequest();
 
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                clockElement.value = xhr.responseText;
+            }
+        };
+
+        xhr.open('GET', '<?= base_url("pendaftaran/get_current_time"); ?>', true);
+        xhr.send();
+
+        setTimeout(updatewaktu, 1000); // Refresh every 1 second
+    }
+
+    updatewaktu();
 </script>

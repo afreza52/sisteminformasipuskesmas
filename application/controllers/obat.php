@@ -55,6 +55,13 @@ class obat extends CI_Controller
             redirect('obat');
         }
     }
+    function delet($id)
+    {
+        $this->db->where('id_obat', $id);
+        $this->db->delete('obat');
+        $this->session->set_flashdata('message2', '<div class="alert alert-success" role="alert">obat telah dihapus!</div>');
+        redirect('obat');
+    }
     function cetakresep($id)
     {
         $data= [

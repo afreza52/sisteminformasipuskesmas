@@ -12,7 +12,7 @@ class fungsi
     function user_login()
     {
         $id_user = $this->ci->session->userdata('id_user');
-        $user_data = $this->ci->db->get('user', ['id_user' => $id_user])->row();
+        $user_data = $this->ci->db->get_where('user', ['id_user' => $id_user])->row();
         return $user_data;
     }
     function count_dokter()

@@ -27,6 +27,7 @@
                             <th>#</th>
                             <th>ID Pemeriksaan</th>
                             <th>Pasien</th>
+                            <th>Jenis Pasien</th>
                             <th>Total Biaya</th>
                             <th class="text-center">Status</th>
                             <th>Aksi</th>
@@ -44,6 +45,9 @@
                                 </td>
                                 <td>
                                     <?= $p['pasien']; ?>
+                                </td>
+                                <td>
+                                    <?= $p['jenis_pasien']  == 1 ? "Umum" :  "BPJS"; ?>
                                 </td>
                                 <td>
                                     Rp.
@@ -142,7 +146,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-undo"></i> Batal</button>
                         <button type="submit" class="btn btn-primary"><i class="fa fa-dollar"></i> Bayar</button>
                     </div>
                 </form>

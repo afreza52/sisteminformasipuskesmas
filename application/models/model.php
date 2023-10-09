@@ -90,7 +90,7 @@ class model extends CI_Model
   }
   function pembayaran($where)
   {
-    $query = "SELECT a.*,b.id_pemeriksaan,c.nama as pasien
+    $query = "SELECT a.*,b.id_pemeriksaan,c.nama as pasien,c.jenis_pasien
                 FROM pembayaran as a
                 JOIN pemeriksaan as b ON a.id_pemeriksaan = b.id_pemeriksaan
                 JOIN pendaftaran as d ON b.id_pendaftaran = d.id_pendaftaran

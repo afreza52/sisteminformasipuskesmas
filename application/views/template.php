@@ -158,9 +158,22 @@
                                         alt="User Image">
 
                                     <p>
-
+                                        <?= ucfirst($this->fungsi->user_login()->nama); ?>
                                         <small>
+                                            <?php $role = $this->fungsi->user_login()->role;
 
+                                            if ($role == 1) {
+                                                $hasil = "admin";
+                                            } elseif ($role == 2) {
+                                                $hasil = "petugas";
+                                            } elseif ($role == 3) {
+                                                $hasil = "dokter";
+                                            } else {
+                                                $hasil = "Tidak Dikenal"; // Jika nilai tidak sesuai dengan 1, 2, atau 3
+                                            }
+
+                                            echo ucwords($hasil);
+                                            ?>
                                         </small>
                                     </p>
                                 </li>
@@ -197,8 +210,25 @@
                             alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p>Afreza</p>
-                        <a href="#"><i class="fa fa-circle text-info"></i> Petugas/admin</a>
+                        <p>
+                            <?= ucfirst($this->fungsi->user_login()->nama); ?>
+                        </p>
+                        <a href="#"><i class="fa fa-circle text-info"></i>
+                            <?php $role = $this->fungsi->user_login()->role;
+
+                            if ($role == 1) {
+                                $hasil = "admin";
+                            } elseif ($role == 2) {
+                                $hasil = "petugas";
+                            } elseif ($role == 3) {
+                                $hasil = "dokter";
+                            } else {
+                                $hasil = "Tidak Dikenal"; // Jika nilai tidak sesuai dengan 1, 2, atau 3
+                            }
+
+                            echo ucwords($hasil);
+                            ?>
+                        </a>
                     </div>
                 </div>
                 <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -208,85 +238,96 @@
                         <a href="<?= base_url('dashboard'); ?>"><i class="fa fa-dashboard"></i>
                             <span>Dashboard</span></a>
                     </li>
+                    <?php
+                    $role = $this->fungsi->user_login()->role;
+                    if ($role == 1 || $role == 3) { ?>
+                        <li
+                            class="treeview <?= $this->uri->segment(1) == 'umum' || $this->uri->segment(1) == 'gigi' || $this->uri->segment(1) == 'mata' || $this->uri->segment(1) == 'anak' || $this->uri->segment(1) == 'lansia' || $this->uri->segment(1) == 'KIA_MTBS_KB' || $this->uri->segment(1) == 'gigi' ? 'active' : '' ?>">
+                            <a href="#">
+                                <i class="fa fa-list"></i>
+                                <span>Pemeriksaan</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li <?= $this->uri->segment(1) == 'umum' ? 'class="active"' : '' ?>><a
+                                        href="<?= base_url('umum'); ?>"><i class="fa fa-stethoscope"></i>Poli
+                                        Umum</a>
+                                </li>
+                                <li <?= $this->uri->segment(1) == 'gigi' ? 'class="active"' : '' ?>><a
+                                        href="<?= base_url('gigi'); ?>"><i class="fa fa-stethoscope"></i>Poli
+                                        Gigi</a>
+                                </li>
+                                <li <?= $this->uri->segment(1) == 'mata' ? 'class="active"' : '' ?>><a
+                                        href="<?= base_url('mata'); ?>"><i class="fa fa-stethoscope"></i>Poli
+                                        Mata</a>
+                                </li>
+                                <li <?= $this->uri->segment(1) == 'anak' ? 'class="active"' : '' ?>><a
+                                        href="<?= base_url('anak'); ?>"><i class="fa fa-stethoscope"></i>Poli
+                                        Anak</a>
+                                </li>
+                                <li <?= $this->uri->segment(1) == 'lansia' ? 'class="active"' : '' ?>><a
+                                        href="<?= base_url('lansia'); ?>"><i class="fa fa-stethoscope"></i>Poli Lansia</a>
+                                </li>
+                                <li <?= $this->uri->segment(1) == 'KIA_MTBS_KB' ? 'class="active"' : '' ?>><a
+                                        href="<?= base_url('KIA_MTBS_KB'); ?>"><i class="fa fa-stethoscope"></i>Poli
+                                        KIA_MTBS_KB</a>
+                                </li>
+                                <li <?= $this->uri->segment(1) == 'gizi' ? 'class="active"' : '' ?>><a
+                                        href="<?= base_url('gizi'); ?>"><i class="fa fa-stethoscope"></i>Poli Gizi</a>
+                                </li>
+                            </ul>
+                        </li>
+                    <?php }
+                    ; ?>
+                    <?php $role = $this->fungsi->user_login()->role;
+                    if ($role == 1 || $role == 2) { ?>
+                        <li class="treeview <?= $this->uri->segment(1) == 'pendaftaran' ? 'active' : '' ?>">
+                            <a href="#">
+                                <i class="fa fa-list"></i>
+                                <span>Pendaftaran</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li <?= $this->uri->segment(2) == 'daftarbaru' ? 'class="active"' : '' ?>><a
+                                        href="<?= base_url('pendaftaran/daftarbaru'); ?>"><i
+                                            class="fa fa-registered"></i>Daftar</a>
+                                </li>
+                                <li <?= $this->uri->segment(2) == 'terdaftar' ? 'class="active"' : '' ?>><a
+                                        href="<?= base_url('pendaftaran/terdaftar'); ?>"><i
+                                            class="fa fa-registered"></i>Terdaftar</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li
+                            class="treeview <?= $this->uri->segment(1) == 'pembayaranlunas' || $this->uri->segment(1) == 'pembayaranbelumlunas' ? 'active' : '' ?>">
+                            <a href="#">
+                                <i class="fa fa-list"></i>
+                                <span>Transaksi</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li <?= $this->uri->segment(1) == 'pembayaranlunas' ? 'class="active"' : '' ?>><a
+                                        href="<?= base_url('pembayaranlunas'); ?>"><i class="fa fa-users"></i>Data
+                                        Pembayaran Lunas</a>
+                                </li>
+                                <li <?= $this->uri->segment(1) == 'pembayaranbelumlunas' ? 'class="active"' : '' ?>><a
+                                        href="<?= base_url('pembayaranbelumlunas'); ?>"><i class="fa fa-heartbeat"></i>Data
+                                        Pembayaran Belum Lunas
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    <?php }
+                    ; ?>
                     <li
-                        class="treeview <?= $this->uri->segment(1) == 'umum' || $this->uri->segment(1) == 'gigi' || $this->uri->segment(1) == 'mata' || $this->uri->segment(1) == 'anak' || $this->uri->segment(1) == 'lansia' || $this->uri->segment(1) == 'KIA_MTBS_KB' || $this->uri->segment(1) == 'gigi' ? 'active' : '' ?>">
-                        <a href="#">
-                            <i class="fa fa-list"></i>
-                            <span>Pemeriksaan</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li <?= $this->uri->segment(1) == 'umum' ? 'class="active"' : '' ?>><a
-                                    href="<?= base_url('umum'); ?>"><i class="fa fa-stethoscope"></i>Poli
-                                    Umum</a>
-                            </li>
-                            <li <?= $this->uri->segment(1) == 'gigi' ? 'class="active"' : '' ?>><a
-                                    href="<?= base_url('gigi'); ?>"><i class="fa fa-stethoscope"></i>Poli
-                                    Gigi</a>
-                            </li>
-                            <li <?= $this->uri->segment(1) == 'mata' ? 'class="active"' : '' ?>><a
-                                    href="<?= base_url('mata'); ?>"><i class="fa fa-stethoscope"></i>Poli
-                                    Mata</a>
-                            </li>
-                            <li <?= $this->uri->segment(1) == 'anak' ? 'class="active"' : '' ?>><a
-                                    href="<?= base_url('anak'); ?>"><i class="fa fa-stethoscope"></i>Poli
-                                    Anak</a>
-                            </li>
-                            <li <?= $this->uri->segment(1) == 'lansia' ? 'class="active"' : '' ?>><a
-                                    href="<?= base_url('lansia'); ?>"><i class="fa fa-stethoscope"></i>Poli Lansia</a>
-                            </li>
-                            <li <?= $this->uri->segment(1) == 'KIA_MTBS_KB' ? 'class="active"' : '' ?>><a
-                                    href="<?= base_url('KIA_MTBS_KB'); ?>"><i class="fa fa-stethoscope"></i>Poli
-                                    KIA_MTBS_KB</a>
-                            </li>
-                            <li <?= $this->uri->segment(1) == 'gizi' ? 'class="active"' : '' ?>><a
-                                    href="<?= base_url('gizi'); ?>"><i class="fa fa-stethoscope"></i>Poli Gizi</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="treeview <?= $this->uri->segment(1) == 'pendaftaran' ? 'active' : '' ?>">
-                        <a href="#">
-                            <i class="fa fa-list"></i>
-                            <span>Pendaftaran</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li <?= $this->uri->segment(2) == 'daftarbaru' ? 'class="active"' : '' ?>><a
-                                    href="<?= base_url('pendaftaran/daftarbaru'); ?>"><i
-                                        class="fa fa-registered"></i>Daftar</a>
-                            </li>
-                            <li <?= $this->uri->segment(2) == 'terdaftar' ? 'class="active"' : '' ?>><a
-                                    href="<?= base_url('pendaftaran/terdaftar'); ?>"><i
-                                        class="fa fa-registered"></i>Terdaftar</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li
-                        class="treeview <?= $this->uri->segment(1) == 'pembayaranlunas' || $this->uri->segment(1) == 'pembayaranbelumlunas' ? 'active' : '' ?>">
-                        <a href="#">
-                            <i class="fa fa-list"></i>
-                            <span>Transaksi</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li <?= $this->uri->segment(1) == 'pembayaranlunas' ? 'class="active"' : '' ?>><a
-                                    href="<?= base_url('pembayaranlunas'); ?>"><i class="fa fa-users"></i>Data
-                                    Pembayaran Lunas</a>
-                            </li>
-                            <li <?= $this->uri->segment(1) == 'pembayaranbelumlunas' ? 'class="active"' : '' ?>><a
-                                    href="<?= base_url('pembayaranbelumlunas'); ?>"><i class="fa fa-heartbeat"></i>Data Pembayaran Belum Lunas
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li
-                        class="treeview <?= $this->uri->segment(1) == 'pasien' || $this->uri->segment(1) == 'dokter' || $this->uri->segment(1) == 'poliklinik' || $this->uri->segment(1) == 'diagnosa' || $this->uri->segment(1) == 'pemeriksaan' || $this->uri->segment(1) == 'obat' || $this->uri->segment(1) == 'obat' ? 'active' : '' ?>">
+                        class="treeview <?= $this->uri->segment(1) == 'pasien' || $this->uri->segment(1) == 'dokter' || $this->uri->segment(1) == 'poliklinik' || $this->uri->segment(1) == 'diagnosa' || $this->uri->segment(1) == 'pemeriksaan' || $this->uri->segment(1) == 'obat' || $this->uri->segment(1) == 'obat' || $this->uri->segment(1) == 'tindakan' ? 'active' : '' ?>">
                         <a href="#">
                             <i class="fa fa-list"></i>
                             <span>Master Data</span>
@@ -325,8 +366,38 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="header">SETTINGS</li>
-                    <li><a href="<?= base_url('user'); ?>"><i class="fa fa-user"></i> <span>Users</span></a></li>
+                    <li class="treeview <?= $this->uri->segment(1) == 'laporan' || $this->uri->segment(1) == '' ?>">
+                        <a href="#">
+                            <i class="fa fa-list"></i>
+                            <span>Laporan</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <?php $role = $this->fungsi->user_login()->role;
+                            if ($role == 1 || $role == 3) { ?>
+                                <li <?= $this->uri->segment(1) == '#' ? 'class="active"' : '' ?>><a
+                                        href="<?= base_url('#'); ?>"><i class="fa fa-file-text"></i>
+                                        Pemeriksaan</a>
+                                </li>
+                            <?php }
+                            ; ?>
+                            <?php $role = $this->fungsi->user_login()->role;
+                            if ($role == 1 || $role == 2) { ?>
+                                <li <?= $this->uri->segment(1) == '#' ? 'class="active"' : '' ?>><a
+                                        href="<?= base_url('#'); ?>"><i class="fa fa-file-text"></i>Pendaftaran</a>
+                                </li>
+                            <?php }
+                            ; ?>
+                        </ul>
+                    </li>
+                    <?php ?>
+                    <?php if ($this->fungsi->user_login()->role == 1) { ?>
+                        <li class="header">SETTINGS</li>
+                        <li><a href="<?= base_url('user'); ?>"><i class="fa fa-user"></i> <span>Users</span></a></li>
+                    <?php }
+                    ; ?>
 
 
                 </ul>

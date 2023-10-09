@@ -163,8 +163,8 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button type="close" class="btn btn-xs btn-secondary" data-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-xs btn-primary" id="simpan">Simpan</button>
+                            <button type="close" class="btn btn-xs btn-secondary" data-dismiss="modal"><i class="fa fa-undo"></i> Batal</button>
+                            <button type="submit" class="btn btn-xs btn-primary" id="simpan"><i class="fa fa-save"></i> Simpan</button>
                         </div>
                     </form>
                 <?php endforeach; ?>
@@ -220,7 +220,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="updateobat" class="btn btn-flat btn-sm btn-success"><i
-                            class="fa fa-paper-plane-o"></i>
+                            class="fa fa-save"></i>
                         Simpan</button>
                 </div>
             </div>
