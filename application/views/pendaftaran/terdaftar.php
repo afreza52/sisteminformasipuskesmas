@@ -34,6 +34,7 @@
                             <th>Dokter</th>
                             <th>Poliklinik</th>
                             <th>Tanggal</th>
+                            <th>Waktu</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -61,6 +62,9 @@
                                 </td>
                                 <td>
                                     <?= $pdf['tanggal_pendaftaran'] ?>
+                                </td>
+                                <td>
+                                    <?= $pdf['waktu_pendaftaran'] ?>
                                 </td>
                                 <td>
                                     <a href="" data-toggle="modal"

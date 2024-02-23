@@ -63,8 +63,10 @@
                                     <?php endif; ?>
                                 </td>
                                 <td class="text-center">
-                                    <a href="<?= base_url('periksamedis/'); ?><?= $p['id_pemeriksaan']; ?>"
-                                        class="btn btn-xs btn-primary"><i class="fa fa-stethoscope"></i>Periksa</a>
+                                    <?php if ($p['status'] == 2): ?>
+                                        <a href="<?= base_url('periksamedis/'); ?><?= $p['id_pemeriksaan']; ?>"
+                                            class="btn btn-xs btn-primary"><i class="fa fa-stethoscope"></i>Periksa</a>
+                                    <?php endif; ?>
                                     <a href="<?= base_url('pemeriksaan/delet/'); ?><?= $p['id_pemeriksaan']; ?>"
                                         class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></a>
                                     <a href="<?= base_url('obat/cetakresep/'); ?><?= $p['id_pemeriksaan']; ?>"

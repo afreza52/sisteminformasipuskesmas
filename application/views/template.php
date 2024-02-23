@@ -242,7 +242,7 @@
                     $role = $this->fungsi->user_login()->role;
                     if ($role == 1 || $role == 3) { ?>
                         <li
-                            class="treeview <?= $this->uri->segment(1) == 'umum' || $this->uri->segment(1) == 'gigi' || $this->uri->segment(1) == 'mata' || $this->uri->segment(1) == 'anak' || $this->uri->segment(1) == 'lansia' || $this->uri->segment(1) == 'KIA_MTBS_KB' || $this->uri->segment(1) == 'gigi' ? 'active' : '' ?>">
+                            class="treeview <?= $this->uri->segment(1) == 'umum' || $this->uri->segment(1) == 'gigi' || $this->uri->segment(1) == 'mata' || $this->uri->segment(1) == 'anak' || $this->uri->segment(1) == 'lansia' || $this->uri->segment(1) == 'KIA_MTBS_KB' || $this->uri->segment(1) == 'gizi' ? 'active' : '' ?>">
                             <a href="#">
                                 <i class="fa fa-list"></i>
                                 <span>Pemeriksaan</span>
@@ -366,7 +366,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="treeview <?= $this->uri->segment(1) == 'laporan' || $this->uri->segment(1) == '' ?>">
+                    <li class="treeview <?= $this->uri->segment(2) == 'pendaftaran' ?>">
                         <a href="#">
                             <i class="fa fa-list"></i>
                             <span>Laporan</span>
@@ -377,16 +377,16 @@
                         <ul class="treeview-menu">
                             <?php $role = $this->fungsi->user_login()->role;
                             if ($role == 1 || $role == 3) { ?>
-                                <li <?= $this->uri->segment(1) == '#' ? 'class="active"' : '' ?>><a
-                                        href="<?= base_url('#'); ?>"><i class="fa fa-file-text"></i>
+                                <li <?= $this->uri->segment(2) == '' ? 'class="active"' : '' ?>><a
+                                        href="<?= base_url(''); ?>"><i class="fa fa-file-text"></i>
                                         Pemeriksaan</a>
                                 </li>
                             <?php }
                             ; ?>
                             <?php $role = $this->fungsi->user_login()->role;
                             if ($role == 1 || $role == 2) { ?>
-                                <li <?= $this->uri->segment(1) == '#' ? 'class="active"' : '' ?>><a
-                                        href="<?= base_url('#'); ?>"><i class="fa fa-file-text"></i>Pendaftaran</a>
+                                <li <?= $this->uri->segment(2) == 'pendaftaran' ? 'class="active"' : '' ?>><a
+                                        href="<?= base_url('laporan/pendaftaran'); ?>"><i class="fa fa-file-text"></i>Pendaftaran</a>
                                 </li>
                             <?php }
                             ; ?>
