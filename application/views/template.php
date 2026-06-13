@@ -35,8 +35,7 @@
 
 </head>
 
-<body
-    class="hold-transition skin-blue sidebar-mini <?= $this->uri->segment(1) == 'sale' ? 'sidebar-collapse' : null ?>">
+<body  class="skin-blue fixed sidebar-mini sidebar-mini-expand-feature">
     <div class="wrapper">
 
 

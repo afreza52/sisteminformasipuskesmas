@@ -39,33 +39,33 @@
                     </thead>
                     <tbody>
                         <?php $no = 1; ?>
-                        <?php foreach ($user as $u): ?>
+                        <?php foreach ($app_user as $u): ?>
                             <tr>
                                 <th>
                                     <?= $no; ?>
                                 </th>
                                 <td>
-                                    <?= $u['nama'] ?>
+                                    <?= @$u['nama'] ?>
                                 </td>
                                 <td>
-                                    <?= $u['username'] ?>
+                                    <?= @$u['username'] ?>
                                 </td>
                                 <td>
-                                    <?= $u['alamat'] ?>
+                                    <?= @$u['alamat'] ?>
                                 </td>
                                 <td>
-                                    <?= $u['no_hp']; ?>
+                                    <?= @$u['no_hp']; ?>
                                 </td>
                                 <td>
-                                    <?= $u['role'] == 1 ? "Admin" : ($u['role'] == 2 ? "Petugas" : "Dokter"); ?>
+                                    <?= @$u['role'] == 1 ? "Admin" : (@$u['role'] == 2 ? "Petugas" : "Dokter"); ?>
                                 </td>
                                 <td>
-                                    <?= $u['dibuat']; ?>
+                                    <?= @$u['dibuat']; ?>
                                 </td>
                                 <td class="text-center">
-                                    <a href="" data-toggle="modal" data-target="#edituserModal<?= $u['id_user']; ?>"
+                                    <a href="" data-toggle="modal" data-target="#edituserModal<?= @$u['id_user']; ?>"
                                         class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
-                                    <a href="<?= base_url('user/delete/') ?><?= $u['id_user'] ?>"
+                                    <a href="<?= base_url('user/delete/') ?><?= @$u['id_user'] ?>"
                                         class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></a>
                                 </td>
                             </tr>
@@ -154,7 +154,7 @@
         </div>
     </div>
 </div>
-<?php foreach ($user as $p): ?>
+<?php foreach ($app_user as $p): ?>
     <div class="modal fade" id="edituserModal<?= $p['id_user'] ?>" tabindex="-1" role="dialog"
         aria-labelledby="edituserModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">

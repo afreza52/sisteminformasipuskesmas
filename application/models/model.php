@@ -1,32 +1,28 @@
 <?php
 class model extends CI_Model
 {
-  function norm()
+  public function norm()
   {
-    $sql = "SELECT MAX(MID(nomor_rekam_medis, 3, 4)) AS max_norm FROM pasien";
-    $query = $this->db->query($sql);
+    // Menggunakan SUBSTRING untuk PostgreSQL
+    $query = $this->db->query("SELECT MAX(SUBSTRING(nomor_rekam_medis, 3, 4)) AS max_norm FROM pasien");
+
+    // Jika query menghasilkan data
     if ($query->num_rows() > 0) {
       $row = $query->row();
-      $max_norm = $row->max_norm;
-
-      if ($max_norm !== null) {
-        $n = ((int) $max_norm) + 1;
-        $no = sprintf("%'.04d", $n);
-      } else {
-        $no = "001";
-      }
+      $no = ((int)$row->max_norm) + 1;
+      // Contoh jika formatnya RM0001 (menggunakan padding angka)
+      $new_norm = "RM" . sprintf("%04s", $no);
     } else {
-      $no = "001";
+      $new_norm = "RM0001";
     }
 
-    $norm = "RM" . $no;
-    return $norm;
+    return $new_norm;
   }
   function getDokter()
   {
-    $query = "SELECT dokter.*,dokter.nama as dokter, poliklinik.nama as poliklinik 
-          FROM dokter 
-          JOIN poliklinik ON dokter.id_poliklinik = poliklinik.id_poliklinik";
+    $query = "SELECT a.*, a.nama as dokter_nm, b.nama_poliklinik
+          FROM dokter a
+          INNER JOIN poliklinik b ON b.id_poliklinik = a.id_poliklinik";
     return $this->db->query($query)->result_array();
   }
   function Dokter()
@@ -36,11 +32,18 @@ class model extends CI_Model
   }
   function pendaftaran()
   {
-    $query = "SELECT pendaftaran.*, pasien.*,pasien.nama as pasien,pasien.nomor_rekam_medis as no_rm,poliklinik.nama as poliklinik,dokter.nama as dokter,DATE(pendaftaran.tanggal_pendaftaran) as tanggal_pendaftaran,TIME(pendaftaran.tanggal_pendaftaran) as waktu_pendaftaran
-          FROM pendaftaran 
-          JOIN pasien ON pendaftaran.id_pasien = pasien.id_pasien
-          JOIN poliklinik ON pendaftaran.id_poliklinik = poliklinik.id_poliklinik
-          JOIN dokter ON pendaftaran.id_dokter = dokter.id_dokter";
+    $query = 
+        "SELECT 
+            a.*, b.*,b.nama as pasien,b.nomor_rekam_medis as no_rm,
+            c.nama_poliklinik, d.nama as dokter,
+            EXTRACT(YEAR FROM a.tanggal_pendaftaran)::INT AS tahun, 
+            EXTRACT(MONTH FROM a.tanggal_pendaftaran)::INT AS bulan
+          FROM pendaftaran a
+          LEFT JOIN pasien b ON a.id_pasien = b.id_pasien
+          LEFT JOIN poliklinik c ON a.id_poliklinik = c.id_poliklinik
+          LEFT JOIN dokter d ON a.id_dokter = d.id_dokter
+          ORDER BY a.tanggal_pendaftaran DESC
+        ";
     return $this->db->query($query)->result_array();
   }
   function getRegistrationsByMonth()
@@ -114,33 +117,32 @@ class model extends CI_Model
     JOIN pasien as d ON c.id_pasien = d.id_pasien
     JOIN dokter as b ON c.id_dokter = b.id_dokter
     WHERE a.id_pemeriksaan = ?";
-    return $this->db->query($query,[$where])->result_array();
+    return $this->db->query($query, [$where])->result_array();
   }
-  function pendaftaranfilter($start_date,$end_date,$jenis_pasien)
+  function pendaftaranfilter($start_date, $end_date, $jenis_pasien)
   {
-     
-      $where = '';
-      if ($start_date && $end_date) {
-          $where .= "pendaftaran.tanggal_pendaftaran BETWEEN '$start_date' AND '$end_date' AND ";
-      }
-      if ($jenis_pasien) {
-          $where .= "pasien.jenis_pasien LIKE '%$jenis_pasien%' AND ";
-      }
-      if (!empty($where)) {
-          $where = rtrim($where, 'AND ');
-      }
 
-      $query = "SELECT pendaftaran.*, pasien.*, pasien.nama as pasien, pasien.nomor_rekam_medis as no_rm, poliklinik.nama as poliklinik, dokter.nama as dokter, DATE(pendaftaran.tanggal_pendaftaran) as tanggal_pendaftaran, TIME(pendaftaran.tanggal_pendaftaran) as waktu_pendaftaran
+    $where = '';
+    if ($start_date && $end_date) {
+      $where .= "pendaftaran.tanggal_pendaftaran BETWEEN '$start_date' AND '$end_date' AND ";
+    }
+    if ($jenis_pasien) {
+      $where .= "pasien.jenis_pasien LIKE '%$jenis_pasien%' AND ";
+    }
+    if (!empty($where)) {
+      $where = rtrim($where, 'AND ');
+    }
+
+    $query = "SELECT pendaftaran.*, pasien.*, pasien.nama as pasien, pasien.nomor_rekam_medis as no_rm, poliklinik.nama as poliklinik, dokter.nama as dokter, DATE(pendaftaran.tanggal_pendaftaran) as tanggal_pendaftaran, TIME(pendaftaran.tanggal_pendaftaran) as waktu_pendaftaran
         FROM pendaftaran 
         JOIN pasien ON pendaftaran.id_pasien = pasien.id_pasien
         JOIN poliklinik ON pendaftaran.id_poliklinik = poliklinik.id_poliklinik
         JOIN dokter ON pendaftaran.id_dokter = dokter.id_dokter";
 
-      if (!empty($where)) {
-          $query .= " WHERE $where";
-      }
+    if (!empty($where)) {
+      $query .= " WHERE $where";
+    }
 
-      return $this->db->query($query)->result_array();
-      
+    return $this->db->query($query)->result_array();
   }
 }

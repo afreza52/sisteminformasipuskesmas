@@ -11,7 +11,7 @@ class Auth extends CI_Controller
     function process()
     {
         $username = $this->input->post('username');
-        $query = $this->db->get_where('user', ['username' => $username], 1);
+        $query = $this->db->get_where('app_user', ['username' => $username], 1);
 
         if ($query->num_rows() > 0) {
             $user = $query->row();

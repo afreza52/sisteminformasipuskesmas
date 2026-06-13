@@ -147,7 +147,7 @@
                                         <?= $d['spesialis'] ?>
                                     </td>
                                     <td class="text-center">
-                                        <?= $d['poliklinik'] ?>
+                                        <?= $d['nama'] ?>
                                     </td>
                                 </tr>
                                 <?php $no++ ?>
@@ -233,7 +233,7 @@
                                         <?= $no ?>
                                     </th>
                                     <td class="text-center">
-                                        <?= $p['nama'] ?>
+                                        <?= $p['nama_poliklinik'] ?>
                                     </td>
                                 </tr>
                                 <?php $no++ ?>

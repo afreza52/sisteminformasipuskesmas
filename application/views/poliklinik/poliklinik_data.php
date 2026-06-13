@@ -32,6 +32,7 @@
                         <tr>
                             <th>#</th>
                             <th>Nama poliklinik</th>
+                            <th>Aktif</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -43,13 +44,26 @@
                                     <?= $no; ?>
                                 </th>
                                 <td>
-                                    <?= $pol['nama']; ?>
+                                    <?= $pol['nama_poliklinik']; ?>
+                                </td>
+                                <td>
+                                    <button class="btn btn-xs <?= $pol['active_st'] == 1 ? 'btn-success' : 'btn-danger'; ?>" disabled>
+                                        <?php if ($pol['active_st'] == 1): ?>
+                                            <span class="text-bg-green">
+                                                <i class="fa fa-check"></i>
+                                            </span>
+                                        <?php else: ?>
+                                            <span class="text-bg-green">
+                                                <i class="fa fa-times"></i>
+                                            </span>
+                                        <?php endif; ?>
+                                    </button>
                                 </td>
                                 <td>
                                     <a href="" data-toggle="modal"
                                         data-target="#editPoliklinikModal<?= $pol['id_poliklinik']; ?>"
                                         class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
-                                    <a href="<?= base_url('poliklinik/delet/'); ?><?= $pol['id_poliklinik']; ?>"
+                                    <a href="<?= base_url('poliklinik/delete/'); ?><?= $pol['id_poliklinik']; ?>"
                                         class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></a>
                                 </td>
                             </tr>
@@ -96,7 +110,7 @@
                 </div>
                 <form action="<?= base_url('poliklinik/edit/'); ?><?= $pol['id_poliklinik']; ?>" method="post">
                     <div class="modal-body">
-                        <input type="text" class="form-control" id="nama" name="nama" value="<?= $pol['nama'] ?>">
+                        <input type="text" class="form-control" id="nama" name="nama" value="<?= $pol['nama_poliklinik'] ?>">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-undo"></i> Close</button>

@@ -1,5 +1,5 @@
 <?php
-class User extends CI_Controller
+class App_user extends CI_Controller
 {
     function __construct()
     {
@@ -9,16 +9,16 @@ class User extends CI_Controller
     }
     // function index()
     // {
-    //     $data['user'] = $this->db->get('user')->result_array();
+    //     $data['app_user'] = $this->db->get('app_user')->result_array();
     //     $this->template->load('template', 'user/index', $data);
 
 
     // }
     function index()
     {
-        $data['user'] = $this->db->get('user')->result_array();
+        $data['app_user'] = $this->db->get('app_user')->result_array();
         $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required|trim');
-        $this->form_validation->set_rules('username', 'Username', 'required|min_length[5]|is_unique[user.username]');
+        $this->form_validation->set_rules('username', 'Username', 'required|min_length[4]|is_unique[app_user.username]');
         $this->form_validation->set_rules('no_hp', 'NO Telpon', 'required|min_length[12]|max_length[12]');
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[4]');
         $this->form_validation->set_rules(
@@ -46,18 +46,18 @@ class User extends CI_Controller
                 'role' => $this->input->post('role'),
                 'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT)
             ];
-            $this->db->insert('user', $data);
+            $this->db->insert('app_user', $data);
             $this->session->set_flashdata('message2', '<div class="alert alert-success" role="alert">User telah ditambhakan!</div>');
-            redirect('user');
+            redirect('app_user');
         }
     }
 
     function edit($id)
     {
-        $data['user'] = $this->db->get('user')->result_array();
+        $data['app_user'] = $this->db->get('app_user')->result_array();
         $this->form_validation->set_rules('diperbarui', 'Diperbarui', 'required|trim');
         $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required|trim');
-        $this->form_validation->set_rules('username1', 'Username', 'required|min_length[5]|is_unique[user.username]');
+        $this->form_validation->set_rules('username1', 'Username', 'required|min_length[4]|is_unique[app_user.username]');
         $this->form_validation->set_rules('no_hp', 'NO Telpon', 'required|min_length[12]|max_length[12]');
         if ($this->input->post('password')) {
             $this->form_validation->set_rules('password', 'Password', 'min_length[4]');
@@ -93,15 +93,15 @@ class User extends CI_Controller
                 $data['password'] = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
             }
             $this->db->where('id_user', $id);
-            $this->db->update('user', $data);
+            $this->db->update('app_user', $data);
             $this->session->set_flashdata('message2', '<div class="alert alert-success" role="alert">User telah diubah!</div>');
-            redirect('user');
+            redirect('app_user');
         }
     }
     function username_check()
     {
         $post = $this->input->post(null, true);
-        $query = $this->db->query("SELECT * FROM user WHERE username= '$post[username]' AND user_id != '$post[user_id]'");
+        $query = $this->db->query("SELECT * FROM app_user WHERE username= '$post[username]' AND id_user != '$post[id_user]'");
         if ($query->num_rows() > 0) {
             $this->form_validation->set_message('username_check', '%s ini sudah dipakai');
             return false;
@@ -112,8 +112,8 @@ class User extends CI_Controller
     function delete($id)
     {
         $this->db->where('id_user', $id);
-        $this->db->delete('user');
+        $this->db->delete('app_user');
         $this->session->set_flashdata('message3', '<div class="alert alert-success" role="alert">User telah dihapus!</div>');
-        redirect('user');
+        redirect('app_user');
     }
 }

@@ -1,5 +1,5 @@
 <?php
-class pasien extends CI_Controller
+class Pasien extends CI_Controller
 {
     function __construct()
     {
