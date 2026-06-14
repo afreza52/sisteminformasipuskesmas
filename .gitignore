@@ -1,5 +1,15 @@
 .DS_Store
+Thumbs.db
+*.log
 
+# File Konfigurasi Lokal & Sensitif (Tambahan Baru)
+#--------------------------------------------------
+application/config/database.php
+application/config/config.php
+index.php
+
+# CodeIgniter 3 Core Directories
+#--------------------------------------------------
 application/cache/*
 !application/cache/index.html
 
@@ -8,19 +18,31 @@ application/logs/*
 
 !application/*/.htaccess
 
+# Dependency & Testing Files
+#--------------------------------------------------
 composer.lock
+/vendor/
 tests/mocks/database/ci_test.sqlite
+/tests/tests/
+/tests/results/
 
+# User Guide Build Files
+#--------------------------------------------------
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
 user_guide_src/cilexer/dist/*
 user_guide_src/cilexer/pycilexer.egg-info/*
-/vendor/
 
-# IDE Files
-#-------------------------
+# IDE & Text Editor Files
+#--------------------------------------------------
 /nbproject/
-.idea/*
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
 
 ## Sublime Text cache files
 *.tmlanguage.cache
@@ -28,5 +50,3 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.stTheme.cache
 *.sublime-workspace
 *.sublime-project
-/tests/tests/
-/tests/results/
